@@ -1,0 +1,70 @@
+% template
+\input{style/template.tex}
+
+% References
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{bibliography.bib}
+
+% Glossary
+\input{chapters/02-appendix/01-glossar}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Document Structure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+    % Code Examples
+    \renewcommand{\lstlistingname}{Auflistung}
+    \renewcommand{\lstlistlistingname}{Auflistungsverzeichnis}
+
+    \input{chapters/cover}
+
+    % Table of Content
+    \tableofcontents
+
+    \hypersetup{linkcolor=cyan}
+
+    % Content
+    \part{Part}
+    \label{part}
+
+    \chapter{Chapter}
+    \input{chapters/01-content/01-content.tex}
+
+    \part{Appendix}
+    \appendix
+
+    \hypersetup{linkcolor=black}
+    \printbibliography[title=Literaturverzeichnis,heading=bibnumbered]
+
+    % List of Figures
+    \chapter{\listfigurename}
+    \renewcommand{\listfigurename}{}
+    \vspace{-5cm}
+    \begingroup
+    \let\clearpage\relax
+    \listoffigures
+    \endgroup
+
+    % List of Tables
+    \chapter{\listtablename}
+    \renewcommand{\listtablename}{}
+    \vspace{-5cm}
+    \begingroup
+    \let\clearpage\relax
+    \listoftables
+    \endgroup
+
+
+    \chapter{\lstlistlistingname}
+    \renewcommand{\lstlistlistingname}{}
+    \vspace{-5cm}
+    \begingroup
+    \let\clearpage\relax
+    \lstlistoflistings
+    \endgroup
+
+
+    \chapter{Glossar}
+    \renewcommand{\glossarysection}[2][]{}
+    \printglossary[style=altlist, nopostdot]
+\end{document}

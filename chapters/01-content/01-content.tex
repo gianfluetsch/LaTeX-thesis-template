@@ -1,0 +1,80 @@
+% !TeX spellcheck = de_CH_frami
+\section{Section}
+
+\subsection{Subsection}
+
+
+\subsubsection{Subsubsection}
+\lipsum[1]
+
+\subsubsection{Graphic}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/ost}
+    \caption{The OST Logo!}\label{fig:figure}
+\end{figure}
+
+\newpage
+
+\subsubsection{Table}
+\begin{table}[h]
+    \centering
+    \caption{example tabular}
+    \label{tab:example tabular}
+    \begin{tabular}{l c r}
+%       \begin{tabular}{l | c | r} -> Horizontale Trennstriche
+        \bfseries{left align} & \bfseries{center align} & \bfseries{right align}\\ \hline
+        hello & world & test\\
+        hello & world & test\\
+    \end{tabular}
+\end{table}
+
+\subsubsection{List}
+\begin{itemize}
+    \item hello
+    \item world
+    \item !
+\end{itemize}
+
+\subsubsection{Enumeration}
+\begin{enumerate}
+    \item hello
+    \item world
+    \item !
+\end{enumerate}
+
+\subsubsection{Listings}
+\begin{lstlisting}[caption=example listing,label={lst:lstlisting}]
+//simple listing in default language
+    for (int i = 0; i < 10; i++) {
+    System.out.printline(i + "hello world!");
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[firstnumber=17, caption=example listing, style=JavaScript, label={lst:lstlisting2}]
+// example listing in JS
+    var = hello world
+\end{lstlisting}
+
+
+\subsubsection{Minipage}
+\begin{minipage}{0.5\linewidth}
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{example-image}
+        \vspace{-8pt}
+    \end{center}
+\end{minipage}
+\begin{minipage}{0.45\linewidth}
+    This is a little example text on the right side.\\
+    \texttt{Could also be written} \textit{with different} \textbf{font styles}
+\end{minipage}
+
+\newpage
+
+\subsubsection{Citation}
+Hello World\cite{DummyEntry}. \\
+
+This text requires a citation \cite{einstein} to embed the citation in the required position in the text.
+
+\subsubsection{Glossary}
+This \gls{latex}-text contains two \gls{glossarentry} Entry.

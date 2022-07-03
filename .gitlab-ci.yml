@@ -1,0 +1,59 @@
+image: registry.gitlab.com/islandoftex/images/texlive:latest
+
+stages:
+  - build
+  - release
+
+build_dev:
+  stage: build
+  except:
+    - main
+  script:
+    - pdflatex main.tex
+    - biber main
+    - makeglossaries main
+    - pdflatex main.tex
+  after_script:
+    - mv main.pdf LaTeX_Thesis_Template.pdf
+  artifacts:
+    paths:
+      - LaTeX_Thesis_Template.pdf
+    expire_in: 1 day
+
+build_prod:
+  stage: build
+  only:
+    - main
+  except:
+    - branches
+  script:
+    - pdflatex main.tex
+    - biber main
+    - makeglossaries main
+    - pdflatex main.tex
+  after_script:
+    - mv main.pdf LaTeX_Thesis_Template.pdf
+  artifacts:
+    paths:
+      - LaTeX_Thesis_Template.pdf
+    expire_in: 2 weeks
+
+release_prod:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  only:
+    - tags
+  script:
+    echo 'Create Release $CI_COMMIT_TAG'
+  artifacts:
+    paths:
+      - LaTeX_Thesis_Template.pdf
+    expire_in: 1 year
+  release:
+    name: 'Release $CI_COMMIT_TAG'
+    description: 'Release $CI_COMMIT_TAG'
+    tag_name: '$CI_COMMIT_TAG'
+    assets:
+      links:
+        - name: 'LaTeX_Thesis_Template.pdf'
+          url: 'https://gitlab.com/<group>/<repository>/-/jobs/${CI_JOB_ID}/artifacts/file/LaTeX_Thesis_Template.pdf'
